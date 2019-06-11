@@ -3,11 +3,36 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <ApplicationIcon />
+    <OutputType>WinExe</OutputType>
+    <StartupObject />
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Authorization\**" />
+    <Compile Remove="Views\Models\**" />
+    <Content Remove="Authorization\**" />
+    <Content Remove="Views\Models\**" />
+    <EmbeddedResource Remove="Authorization\**" />
+    <EmbeddedResource Remove="Views\Models\**" />
+    <None Remove="Authorization\**" />
+    <None Remove="Views\Models\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ClassLibrary1\VanPiereWebsite.Data.csproj" />
+    <ProjectReference Include="..\VanPiereWebsite.Logic\VanPiereWebsite.Logic.csproj" />
+    <ProjectReference Include="..\VanPiereWebsite.Models\VanPiereWebsite.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="lib\Content\Fonts\" />
   </ItemGroup>
 
 </Project>

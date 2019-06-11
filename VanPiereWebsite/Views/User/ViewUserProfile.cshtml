@@ -1,0 +1,171 @@
+﻿@using Microsoft.AspNetCore.Http;
+@using Newtonsoft.Json;
+@using VanPiereWebsite.Models.Users;
+
+@inject IHttpContextAccessor HttpCA;
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+    UserModel user = null;
+    var userJson = HttpCA.HttpContext.Session.GetString("currentUser");
+
+    if (userJson != null)
+    {
+        user = JsonConvert.DeserializeObject<UserModel>(userJson);
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ViewUserProfile</title>
+</head>
+<body>
+    <div class="column left" style="text-align:center;">
+        <img src="~/lib/Content/Images/index.jpg" />
+        <br /><br />
+        <label>Username: @user.UserName</label>
+    </div>
+    <div class="column middle" id="parent" style="text-align:center;">
+        <div>
+            <h2>Adress Details</h2>
+            @if (user.Adresses == null)
+            {
+                <div id="noadress">
+                    <h3>You haven't registered an adress yet</h3>
+                    <button class="btn-submit" type="button" id="btnAdress" onclick="AddAdress();">Add your first adress</button>
+                </div>
+            }
+            else
+            {
+                @foreach (var Adress in user.Adresses)
+                {
+                    <h3>Adress details:</h3>
+
+                    <label class="text-label">Adress name: @Adress.AdressName </label>
+
+                    <label class="text-label">Street: @Adress.StreetName @Adress.StreetNmbr</label>
+
+                    <label class="text-label">ZipCode: @Adress.ZipCode</label>
+
+                    <label class="text-label">Country: @Adress.Country</label>
+                }
+
+                <button class="btn-submit" type="button" id="btnAdresses" onclick="AddAdress();">Add another adress</button>
+            }
+            </div>
+        <div>
+            <h2>Your Events</h2>
+            @if (user.UserEvents.Count == 0)
+            {
+                <div id="noevents">
+                    <h3>You haven't joined any events yet!</h3>
+                </div>
+            }
+            else
+            {
+                @foreach (var Event in user.UserEvents)
+                {
+                    <h3>Event Details:</h3>
+
+                    <label class="text-label">Event Name: @Event.Name</label>
+
+                    <label class="text-label">Event Date: @Event.Date.ToShortDateString()</label>
+
+                    <button href="@Url.Action("ViewEvent", "Agenda", new { @eventID = Event.EventID }, null )">View this event</button>
+                }
+            }
+        </div>
+        </div>
+</body>
+</html>
+
+<script>
+    var divlocation;
+
+    var adressdiv;
+    var adressform;
+    var adressnameinput;
+    var adressstreetinput;
+    var adressnmbrinput;
+    var adresszipinput;
+    
+    function AddAdress()
+    {
+        var noadressdiv = document.getElementById("noadress");
+        divlocation = noadressdiv.getBoundingClientRect();
+        
+        noadressdiv.remove();
+
+        CreateElements();
+
+        var parentdiv = document.getElementById("parent");
+
+        parentdiv.appendChild(adressdiv);
+    }
+
+    function CreateElements()
+    {
+        adressdiv = document.createElement("div");
+        adressdiv.style.position = divlocation;
+        adressdiv.setAttribute("justify-content", "flex");
+
+        adressform = document.createElement("form");
+        adressform.setAttribute("asp-controller", "User");
+        adressform.setAttribute("asp-action", "AddAdress");
+
+        adressnameinput = document.createElement("input");
+        adressnameinput.setAttribute("type", "text");
+        adressnameinput.setAttribute("name", "adressname");
+        adressnameinput.setAttribute("class", "search-input");
+        adressnameinput.setAttribute("value", "enter adress name here");
+        adressnameinput.setAttribute("onfocus", "this.value=''");
+
+        adressstreetinput = document.createElement("input");
+        adressstreetinput.setAttribute("type", "text");
+        adressstreetinput.setAttribute("name", "streetname");
+        adressstreetinput.setAttribute("class", "search-input");
+        adressstreetinput.setAttribute("value", "enter street here");
+        adressstreetinput.setAttribute("onfocus", "this.value=''");
+
+        adressnmbrinput = document.createElement("input")
+        adressnmbrinput.setAttribute("type", "text");
+        adressnmbrinput.setAttribute("name", "streetnmbr");
+        adressnmbrinput.setAttribute("class", "search-input");
+        adressnmbrinput.setAttribute("value", "enter house number here");
+        adressnmbrinput.setAttribute("onfocus", "this.value=''");
+
+        adresszipinput = document.createElement("input")
+        adresszipinput.setAttribute("type", "text");
+        adresszipinput.setAttribute("name", "zipcode");
+        adresszipinput.setAttribute("class", "search-input");
+        adresszipinput.setAttribute("value", "enter zip code here");
+        adresszipinput.setAttribute("onfocus", "this.value=''");
+
+        adresscountryinput = document.createElement("input")
+        adresscountryinput.setAttribute("type", "text");
+        adresscountryinput.setAttribute("name", "country");
+        adresscountryinput.setAttribute("class", "search-input");
+        adresscountryinput.setAttribute("value", "enter country here");
+        adresscountryinput.setAttribute("onfocus", "this.value=''");
+
+        btnsubmit = document.createElement("button");
+        btnsubmit.setAttribute("type", "submit");
+        btnsubmit.setAttribute("id", "submit");
+        btnsubmit.setAttribute("class", "btn-submit");
+        btnsubmit.style.width = "70%";
+        btnsubmit.innerHTML = "submit adress!";
+
+        adressdiv.appendChild(adressform);
+        adressform.appendChild(adressnameinput);
+        adressform.appendChild(adressstreetinput);
+        adressform.appendChild(adressnmbrinput);
+        adressform.appendChild(adresszipinput);
+        adressform.appendChild(adresscountryinput);
+        adressform.appendChild(btnsubmit);
+    }
+</script>

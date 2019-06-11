@@ -1,0 +1,38 @@
+﻿@using Microsoft.AspNetCore.Http;
+@using Newtonsoft.Json;
+@using VanPiereWebsite.Models.Users;
+
+@inject IHttpContextAccessor HttpCA;
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var userJson = HttpCA.HttpContext.Session.GetString("currentUser");
+    var user = JsonConvert.DeserializeObject<UserModel>(userJson);
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>LoginSucceeded</title>
+</head>
+<body>
+    <div class="column left">
+
+    </div>
+    <div class="column middle" style="text-align:center;">
+        <h1>You are now logged in</h1>
+        <h2>Welcome back @user.UserName !</h2>
+        <h3>Redirecting home soon...</h3>
+    </div>
+</body>
+</html>
+
+<script>
+    window.setTimeout(function () {
+        window.location.href = 'LoginSucceeded';
+    }, 1500
+    );
+</script>

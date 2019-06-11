@@ -1,0 +1,109 @@
+﻿@model List<VanPiereWebsite.Models.AgendaItem>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Index";
+    @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+}
+<html>
+<body>
+    <div class="row">
+        <div class="column left">
+            <p>1Lorem ipsum dolor sit amet, at regione dolores sit. Cum ne prima nihil. Vim quaeque temporibus ne. Mel ex sonet nullam discere, has etiam utroque et, quidam deseruisse no sit.
+
+                Vim dicunt aliquip suscipiantur ne. Magna delectus rationibus ei duo, id diam populo consequuntur vim. No odio purto duo, ex sit homero fabellas instructior, ea usu dolore animal scriptorem. Quas omnis corpora eam in, duo congue suscipit ne, ad eos ceteros ocurreret.
+
+            </p>
+        </div>
+        <div class="column middle">
+            <img src="~/lib/Content/Images/boekhandel-van-piere.jpg" style="width:100%" />
+        </div>
+        <div class="column right">
+            <div class="agenda-container" onload="ManageEvents()">
+                <div class="agenda-top row" style="width:100%;">
+                    <div class="row" style="width:90%;">
+                        <label class="agenda-label top" style="float:left; text-align:left; padding-right:49%;">Event name</label>
+                        <label class="agenda-label top" style="float:right; text-align:right;">Event date</label>
+                    </div>
+                </div>
+                <div style="width:95%;">
+                    @{
+                        int i = 0;
+                        if (i < Model.Count)
+                        {
+                            foreach (var Event in Model)
+                            {
+                                <div class="row agendaitem" style="width:90%; display:inline-flex;">
+                                    <div class="agenda-item-row name" style="float:left; text-align:left;" id="@Model.ElementAt(i).Name">
+                                        <label class="agenda-label">@Model.ElementAt(i).Name</label>
+                                    </div>
+                                    <div class="agenda-item-row date" id="@Model.ElementAt(i).Date">
+                                        <label class="agenda-label" style="float:right; text-align:right;">@Model.ElementAt(i).Date.ToString("dd-MM-yyyy")</label>
+                                    </div>
+                                    <a href="@Url.Action("ViewEvent", "Agenda", new { @eventID = Model.ElementAt(i).EventID }, null )">
+                                        <span class="link-spanner"></span>
+                                    </a>
+                                </div>
+                                i++;
+                            }
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column left">
+            <p>
+                1Lorem ipsum dolor sit amet, at regione dolores sit. Cum ne prima nihil. Vim quaeque temporibus ne. Mel ex sonet nullam discere, has etiam utroque et, quidam deseruisse no sit.
+
+                Vim dicunt aliquip suscipiantur ne. Magna delectus rationibus ei duo, id diam populo consequuntur vim. No odio purto duo, ex sit homero fabellas instructior, ea usu dolore animal scriptorem. Quas omnis corpora eam in, duo congue suscipit ne, ad eos ceteros ocurreret.
+
+                Cum argumentum disputando contentiones ea, per te verear aeterno. Ex rationibus complectitur mea. Fabellas adolescens no mel. Labore torquatos sententiae his ex. Brute minim et sea, mei verear dolorum ullamcorper eu.
+
+                Modo ubique graeco qui cu, qui cetero imperdiet ad, qui ex pericula laboramus theophrastus. Eu vide rationibus eos, ne ius torquatos signiferumque, vis ei iusto saperet. Ne diceret debitis qui, dicant equidem contentiones no per. Ne vim tibique ocurreret repudiandae, eum ei partem moderatius, an vix sonet detraxit. Error dictas percipitur cum in, unum exerci menandri ei sed.
+
+                Hinc gloriatur quo ad, at quo suscipit mediocrem similique. Error legimus minimum nam ne. Nisl appareat quaestio eam et, qui ei malorum assueverit. Patrioque gloriatur te pro, ex duo movet causae singulis. Delicata liberavisse eu nec.
+            </p>
+        </div>
+        <div class="column middle">
+            <p>
+                2Lorem ipsum dolor sit amet, at regione dolores sit. Cum ne prima nihil. Vim quaeque temporibus ne. Mel ex sonet nullam discere, has etiam utroque et, quidam deseruisse no sit.
+
+                Vim dicunt aliquip suscipiantur ne. Magna delectus rationibus ei duo, id diam populo consequuntur vim. No odio purto duo, ex sit homero fabellas instructior, ea usu dolore animal scriptorem. Quas omnis corpora eam in, duo congue suscipit ne, ad eos ceteros ocurreret.
+
+                Cum argumentum disputando contentiones ea, per te verear aeterno. Ex rationibus complectitur mea. Fabellas adolescens no mel. Labore torquatos sententiae his ex. Brute minim et sea, mei verear dolorum ullamcorper eu.
+
+                Modo ubique graeco qui cu, qui cetero imperdiet ad, qui ex pericula laboramus theophrastus. Eu vide rationibus eos, ne ius torquatos signiferumque, vis ei iusto saperet. Ne diceret debitis qui, dicant equidem contentiones no per. Ne vim tibique ocurreret repudiandae, eum ei partem moderatius, an vix sonet detraxit. Error dictas percipitur cum in, unum exerci menandri ei sed.
+
+                Hinc gloriatur quo ad, at quo suscipit mediocrem similique. Error legimus minimum nam ne. Nisl appareat quaestio eam et, qui ei malorum assueverit. Patrioque gloriatur te pro, ex duo movet causae singulis. Delicata liberavisse eu nec.
+                2Lorem ipsum dolor sit amet, at regione dolores sit. Cum ne prima nihil. Vim quaeque temporibus ne. Mel ex sonet nullam discere, has etiam utroque et, quidam deseruisse no sit.
+
+                Vim dicunt aliquip suscipiantur ne. Magna delectus rationibus ei duo, id diam populo consequuntur vim. No odio purto duo, ex sit homero fabellas instructior, ea usu dolore animal scriptorem. Quas omnis corpora eam in, duo congue suscipit ne, ad eos ceteros ocurreret.
+
+                Cum argumentum disputando contentiones ea, per te verear aeterno. Ex rationibus complectitur mea. Fabellas adolescens no mel. Labore torquatos sententiae his ex. Brute minim et sea, mei verear dolorum ullamcorper eu.
+
+                Modo ubique graeco qui cu, qui cetero imperdiet ad, qui ex pericula laboramus theophrastus. Eu vide rationibus eos, ne ius torquatos signiferumque, vis ei iusto saperet. Ne diceret debitis qui, dicant equidem contentiones no per. Ne vim tibique ocurreret repudiandae, eum ei partem moderatius, an vix sonet detraxit. Error dictas percipitur cum in, unum exerci menandri ei sed.
+
+                Hinc gloriatur quo ad, at quo suscipit mediocrem similique. Error legimus minimum nam ne. Nisl appareat quaestio eam et, qui ei malorum assueverit. Patrioque gloriatur te pro, ex duo movet causae singulis. Delicata liberavisse eu nec.
+            </p>
+        </div>
+        <div class="column right">
+            <p>
+                3Lorem ipsum dolor sit amet, at regione dolores sit. Cum ne prima nihil. Vim quaeque temporibus ne. Mel ex sonet nullam discere, has etiam utroque et, quidam deseruisse no sit.
+
+                Vim dicunt aliquip suscipiantur ne. Magna delectus rationibus ei duo, id diam populo consequuntur vim. No odio purto duo, ex sit homero fabellas instructior, ea usu dolore animal scriptorem. Quas omnis corpora eam in, duo congue suscipit ne, ad eos ceteros ocurreret.
+
+                Cum argumentum disputando contentiones ea, per te verear aeterno. Ex rationibus complectitur mea. Fabellas adolescens no mel. Labore torquatos sententiae his ex. Brute minim et sea, mei verear dolorum ullamcorper eu.
+
+                Modo ubique graeco qui cu, qui cetero imperdiet ad, qui ex pericula laboramus theophrastus. Eu vide rationibus eos, ne ius torquatos signiferumque, vis ei iusto saperet. Ne diceret debitis qui, dicant equidem contentiones no per. Ne vim tibique ocurreret repudiandae, eum ei partem moderatius, an vix sonet detraxit. Error dictas percipitur cum in, unum exerci menandri ei sed.
+
+                Hinc gloriatur quo ad, at quo suscipit mediocrem similique. Error legimus minimum nam ne. Nisl appareat quaestio eam et, qui ei malorum assueverit. Patrioque gloriatur te pro, ex duo movet causae singulis. Delicata liberavisse eu nec.
+            </p>
+        </div>
+    </div>
+
+
+</body>
+</html>
+
+

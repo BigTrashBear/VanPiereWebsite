@@ -1,0 +1,46 @@
+﻿
+@{
+    @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+}
+
+@model IList<VanPiereWebsite.Models.BookModel>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SearchResult</title>
+</head>
+<body>
+    @foreach (var Book in Model)
+    {
+        <div class="row" style="display:inline-flex;">
+            <div class="column left" style="width: 35%;">
+                <!--<img src="~/lib/Content/Images/index.jpg" width="100%;"/>-->
+                <img src="http://covers.openlibrary.org/b/isbn/@Book.ISBN .jpg" style="width:65%; height:80%" />
+            </div>
+            <div class="column middle">
+                <ul>Book Title: @Book.Title </ul>
+                <ul>Book Author: @Book.Author </ul>
+                <ul>Book ISBN: @Book.ISBN</ul>
+                <ul>Book Price: €@Book.Price</ul>
+                <ul>
+                    <form asp-controller="Book" asp-action="ViewBook">
+                        <div>
+                            <input type="text" name="ISBN" id="ISBN" value="@Book.ISBN" hidden />
+                        </div>
+                        <div>
+                            <input type="submit" class="btn-submit" value="View this book" />
+                        </div>
+                    </form>
+                </ul>
+            </div>
+        </div>
+    }
+</body>
+</html>

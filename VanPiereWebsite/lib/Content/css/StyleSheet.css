@@ -1,0 +1,172 @@
+﻿@charset "UTF-8";
+@font-face {
+    font-family: Customfont;
+    src:url('../Fonts/Brando Text.otf');
+}
+
+.header {
+    background-color: #808080;
+    padding: 20px;
+    display: flex;
+    background-image: linear-gradient(to left, rgba(0,0,0,1), rgba(0,0,0,0.2)), url(/lib/Content/Images/Voorkant-Winkel.jpg);
+
+}
+
+.topnav {
+    margin: 0 auto;
+    position: sticky;
+    top: 0;
+    overflow: hidden;
+    background-color: #000000;
+    height: auto;
+    text-decoration: none;
+    text-align: center;
+    justify-content: center;
+}
+
+.topnav a {
+    width:20%;
+    display: inline-flex;
+    justify-content: center;
+    font-family: Customfont;
+    font-size: 20px;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none; color: #ffffff;
+}
+
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+    text-decoration: none;
+}
+
+.column {
+    float: left;
+    padding: 10px;
+}
+
+.left{
+    width:20%;
+}
+
+.right {
+    width:27%;
+}
+
+.middle{
+    width:52%;
+}
+
+.row{
+    display: inline-flex;
+}
+
+.agendaitem {
+    position: relative;
+}
+
+.row:after {
+    content: "";
+    display: flex;
+    clear: both;
+}
+
+.search-input {
+    width:70%;
+    height:35px; 
+    background-color: #8EB946; 
+    border: none;
+    text-align: center;
+}
+
+.dropdown-input{
+    text-align: center;
+    width: 35%;
+    height: 25px;
+    background-color: #8EB946;
+    border: dotted; 
+}
+
+.login-input {
+    width: 45%;
+    height: 30px;
+    background-color: #8EB946;
+    border: solid; border-color:#8EB946;
+    font-family: Customfont;
+    text-decoration: none; color:#ffffff;
+    text-align: center;
+}
+
+.login-div {
+    text-align: center;
+    padding-top: 50px;
+    padding-left: 25%;
+    width: 20%;
+}
+
+.btn-submit {
+    height: 38px;
+    background-color: #000000;
+    text-decoration: none;
+    color: #ffffff;
+    font-family: Customfont;
+    border: solid;
+    border-color: #8EB946;
+}
+
+.text-label {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: medium;
+    font-weight: 700;
+}
+
+p{
+    font-family: Customfont;
+    white-space: pre-line;
+}
+
+.agenda-container {
+    border: solid 1px;
+    width:100%;
+    height:100%;
+}
+
+.agenda-item-row {
+    display: inline-flex;
+}
+
+.name {
+   width:70%;
+   padding-right: 50px;
+}
+
+.date{
+    width: 25%;
+}
+
+.agenda-top {
+    font-family: Customfont;
+    font-size: 18px;
+    text-decoration: none;
+    color: #8EB946;
+    background-color: rgba(0,0,0,1);
+    display:inline-block;
+}
+
+.link-spanner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+
+@media screen and (max-width: 600px) {
+    .column {
+        width: 100%;    
+    }
+}

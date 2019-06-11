@@ -1,0 +1,54 @@
+﻿
+@model VanPiereWebsite.Models.BookModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ViewBook</title>
+</head>
+<body>
+    <div class="row">
+        <div class="column left">
+            <p></p>
+            <!--<img src="~/lib/Content/Images/05afecd73265389be7bd45fb5ad24026--ebook-cover-design-premade-book-covers.jpg" />-->
+            <img src="http://covers.openlibrary.org/b/isbn/@Model.ISBN .jpg" style="width:100%; height:70%;" />
+            <p style="margin-left: 20px">
+                ISBN: @Model.ISBN
+            </p>
+            <p style="margin-left: 20px">
+                Publication Date: @Model.PubDate.ToShortDateString()
+            </p>
+            <p style="margin-left: 20px">
+                Publisher: @Model.Publisher
+            </p>
+            <p style="margin-left: 20px">
+                Number of pages: @Model.PageNmbr
+            </p>
+
+        </div>
+        <div class="column middle">
+            <h1>@Model.Title</h1>
+            <h2>@Model.Author</h2>
+            <p></p>
+            <h1>€ @Model.Price</h1>
+            <p></p>
+            <h3>Description:</h3>
+            <p>@Model.Desc</p>
+            <p></p>
+            <h3>Reviews:</h3>
+            <p> @Model.Reviews </p>
+        </div>
+        <div class="column right">
+            <p></p>
+            <img src="~/lib/Content/Images/index.jpg" />
+            <h3>About the Author:</h3>
+            <p>@Model.AuthorText</p>
+        </div>
+    </div>
+</body>
+</html>

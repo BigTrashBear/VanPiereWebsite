@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+}
+
+<body>
+    <h1>Welkom in de winkel!</h1>
+    
+    <h2>Hier komt de top 25</h2>
+    <form asp-action="ViewFiction" asp-controller="Store">
+        <button>Bezoek de afdeling fictie</button>
+    </form>
+    
+    <h2>Top 10 non-fictie</h2>
+    <form asp-action="ViewNonFiction" asp-controller="Store">
+        <button>Bezoek de afdeling non-fictie</button>
+    </form>
+      
+    <h2>Top 10 kinderboeken</h2>
+    <form asp-action="ViewYouthBooks" asp-controller="Store">
+        <button>Bezoek de afdeling kinderboeken</button>
+    </form>
+    
+    <h2>Top 10 e-books</h2>
+    <form asp-action="ViewEBooks" asp-controller="Store">
+        <button>Bekijk alle e-books</button>
+    </form>
+
+</body>

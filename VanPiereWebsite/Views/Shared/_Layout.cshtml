@@ -1,0 +1,109 @@
+﻿@using Microsoft.AspNetCore.Http;
+@using Newtonsoft.Json;
+@using VanPiereWebsite.Models.Users;
+
+@inject IHttpContextAccessor HttpCA;
+
+@{
+    @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+    UserModel user = null;
+
+    var userJson = HttpCA.HttpContext.Session.GetString("currentUser");
+
+    if (userJson != null)
+    {
+        user = JsonConvert.DeserializeObject<UserModel>(userJson);
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="~/lib/Content/css/StyleSheet.css" media="screen" />
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8" />
+    <title>van Piere Home</title>
+</head>
+<body onload="changeSearch()">
+    <div class="header">
+        <div>
+            <img src="~/lib/Content/Images/logo_vanpiere_verhaalt-zwart-crop.jpg" height="150" width="150" />
+        </div>
+        <div style="text-align:center; padding-top: 50px; width: 60%;">
+            <form asp-controller="Book" asp-action="Search">
+                <div>
+                    <select class="dropdown-input" name="searchKey" id="searchKey" onchange="changeSearch()">
+                        <option value="1">Search by ISBN</option>
+                        <option value="2">Search by Title</option>
+                        <option value="3"> Search by Author</option>
+                    </select>
+                </div>
+                <input class="search-input" type="text" onfocus="this.value=''" name="searchInput" id="searchInput" /><input type="submit" class="btn-submit" value="Search!" />
+            </form>
+        </div>
+        @if (user == null)
+        {
+        <div class="login-div">
+            <form asp-controller="Login" asp-action="Login">
+                <div>
+                    <label class="text-label" for="username">Username:</label>
+                    <input class="login-input" type="text" onfocus="this.value=''" name="username" id="username" required="" />
+                </div>
+                <div>
+                    <label class="text-label" for="password" style="padding-right:4px;">Password:</label>
+                    <input class="login-input" type="password" onfocus="this.value=''" name="password" id="password" required="" />
+                </div>
+                <br />
+                <button class="btn-submit" type="submit">Login</button>
+                <p class="text-label" style="color:red;">@ViewBag.Message</p>
+            </form>
+            <form asp-controller="User" asp-action="ViewRegister">
+                <button class="btn-submit" type="submit">New User?</button>
+            </form>
+        </div>
+        }
+        else
+        {
+            <div class="login-div">
+                <label class="text-label">Logged in as: @user.UserName</label>
+                <br /> <br />
+                <form asp-controller="Login" asp-action="Logout">
+                    <button class="btn-submit" type="submit">Logout</button>
+                </form>
+                <form asp-controller="User" asp-action="ViewUserProfile">
+                    <button class="btn-submit" type="submit">View Profile</button>
+                </form>
+            </div>
+        }
+    </div>
+    <div class="topnav">
+        <a href="@Url.Action("Index", "Home")">Home</a>
+        <a href="#">Books</a>
+        <a href="#">About</a>
+    </div>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>
+
+<script>
+    function changeSearch() {
+
+
+        var searchBox = document.getElementById("searchInput");
+        var e = document.getElementById("searchKey").value;
+        var value = e;
+
+        if (value == 1) {
+            searchBox.value = "Type an ISBN here";
+        }
+        else if (value == 2) {
+            searchBox.value = "Type a Title here";
+        }
+        else if (value == 3) {
+            searchBox.value = "Type an Author name here";
+        }
+    }
+</script>
